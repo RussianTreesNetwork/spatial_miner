@@ -1,0 +1,12 @@
+{
+  "itemGroup.spatialminer": "Spatial Miner",
+
+  "block.spatialminer.battery_block": "Energy Battery",
+  "block.spatialminer.miner_block": "Ghost Dimension Miner",
+  "block.spatialminer.cable_block": "Energy Cable",
+  "block.spatialminer.protection_block": "Protection Block",
+
+  "tooltip.spatialminer.battery_capacity": "Capacity: %s FE",
+  "tooltip.spatialminer.miner_energy": "Energy: %s / %s FE",
+  "tooltip.spatialminer.protection_owner": "Owner: %s"
+}

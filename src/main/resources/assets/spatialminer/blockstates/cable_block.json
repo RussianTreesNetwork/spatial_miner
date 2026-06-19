@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "spatialminer:block/cable_block"
+    }
+  }
+}

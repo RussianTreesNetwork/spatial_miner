@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "spatialminer:block/miner_block"
+    }
+  }
+}

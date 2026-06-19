@@ -1,0 +1,39 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "spatialminer:block/cable_block",
+    "cable": "spatialminer:block/cable_block"
+  },
+  "multipart": [
+    {
+      "comment": "Центральный узел (всегда есть)",
+      "apply": {
+        "model": "spatialminer:block/cable_center"
+      }
+    },
+    {
+      "when": { "north": "true" },
+      "apply": { "model": "spatialminer:block/cable_side", "uvlock": true }
+    },
+    {
+      "when": { "south": "true" },
+      "apply": { "model": "spatialminer:block/cable_side", "y": 180, "uvlock": true }
+    },
+    {
+      "when": { "east": "true" },
+      "apply": { "model": "spatialminer:block/cable_side", "y": 90, "uvlock": true }
+    },
+    {
+      "when": { "west": "true" },
+      "apply": { "model": "spatialminer:block/cable_side", "y": 270, "uvlock": true }
+    },
+    {
+      "when": { "up": "true" },
+      "apply": { "model": "spatialminer:block/cable_side", "x": 270, "uvlock": true }
+    },
+    {
+      "when": { "down": "true" },
+      "apply": { "model": "spatialminer:block/cable_side", "x": 90, "uvlock": true }
+    }
+  ]
+}
