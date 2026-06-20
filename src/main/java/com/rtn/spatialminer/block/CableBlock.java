@@ -3,7 +3,6 @@ package com.rtn.spatialminer.block;
 import com.mojang.serialization.MapCodec;
 import com.rtn.spatialminer.tileentity.CableTileEntity;
 import com.rtn.spatialminer.registry.ModTileEntities;
-import com.rtn.spatialminer.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -12,7 +11,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -23,9 +21,11 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.Nullable;
 
-public class CableBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+public class CableBlock extends BaseEntityBlock {
     public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
     public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
     public static final BooleanProperty EAST = BlockStateProperties.EAST;
@@ -33,10 +33,8 @@ public class CableBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     public static final BooleanProperty UP = BlockStateProperties.UP;
     public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
 
-    // Центральный куб 4x4x4 (координаты 0.375 - 0.625)
-    protected static final VoxelShape CABLE_SHAPE = Shapes.box(0.375, 0.375, 0.375, 0.625, 0.625, 0.625);
-
-    // Готовые формы соединений для каждой стороны
+    // ХИТБОКСЫ
+    protected static final VoxelShape CENTER_SHAPE = Shapes.box(0.375, 0.375, 0.375, 0.625, 0.625, 0.625);
     protected static final VoxelShape CONNECT_NORTH = Shapes.box(0.375, 0.375, 0.0, 0.625, 0.625, 0.375);
     protected static final VoxelShape CONNECT_SOUTH = Shapes.box(0.375, 0.375, 0.625, 0.625, 0.625, 1.0);
     protected static final VoxelShape CONNECT_EAST  = Shapes.box(0.625, 0.375, 0.375, 1.0, 0.625, 0.625);
@@ -53,7 +51,7 @@ public class CableBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
+    protected MapCodec<? extends CableBlock> codec() {
         return simpleCodec(CableBlock::new);
     }
 
@@ -79,15 +77,13 @@ public class CableBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        VoxelShape shape = CABLE_SHAPE;
-
+        VoxelShape shape = CENTER_SHAPE;
         if (state.getValue(NORTH)) shape = Shapes.or(shape, CONNECT_NORTH);
         if (state.getValue(SOUTH)) shape = Shapes.or(shape, CONNECT_SOUTH);
         if (state.getValue(EAST))  shape = Shapes.or(shape, CONNECT_EAST);
         if (state.getValue(WEST))  shape = Shapes.or(shape, CONNECT_WEST);
         if (state.getValue(UP))    shape = Shapes.or(shape, CONNECT_UP);
         if (state.getValue(DOWN))  shape = Shapes.or(shape, CONNECT_DOWN);
-
         return shape;
     }
 
@@ -103,15 +99,19 @@ public class CableBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
-        boolean connected = canConnectTo(neighborState.getBlock());
-        return state.setValue(getPropertyForDirection(direction), connected);
-    }
+        if (neighborState.isAir() || level.isClientSide()) {
+            return state.setValue(getPropertyForDirection(direction), false);
+        }
 
-    private boolean canConnectTo(Block block) {
-        return block instanceof CableBlock ||
-                block == ModBlocks.BATTERY_BLOCK.get() ||
-                block == ModBlocks.MINER_BLOCK.get() ||
-                block == ModBlocks.PROTECTION_BLOCK.get();
+        boolean isCable = neighborState.getBlock() instanceof CableBlock;
+        boolean hasEnergy = false;
+        if (level instanceof Level realLevel) {
+            IEnergyStorage storage = realLevel.getCapability(Capabilities.EnergyStorage.BLOCK, neighborPos, neighborState, null, direction.getOpposite());
+            hasEnergy = storage != null;
+        }
+
+        boolean connected = isCable || hasEnergy;
+        return state.setValue(getPropertyForDirection(direction), connected);
     }
 
     private BooleanProperty getPropertyForDirection(Direction direction) {
