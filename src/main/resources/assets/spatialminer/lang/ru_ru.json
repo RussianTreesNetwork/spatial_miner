@@ -4,7 +4,7 @@
   "block.spatialminer.battery_block": "Энергетическая батарея",
   "block.spatialminer.miner_block": "Шахтёр из призрачного измерения",
   "block.spatialminer.cable_block": "Энергетический кабель",
-  "block.spatialminer.protection_block": "Блок защиты",
+  "block.spatialminer.protection_block": "Блок защиты сети",
 
   "tooltip.spatialminer.battery_capacity": "Ёмкость: %s FE",
   "tooltip.spatialminer.miner_energy": "Энергия: %s / %s FE",
