@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "spatialminer:block/ores/deepslate",
+    "north": "spatialminer:block/ores/keplerite_deepslate_ore",
+    "south": "spatialminer:block/ores/keplerite_deepslate_ore",
+    "east": "spatialminer:block/ores/keplerite_deepslate_ore",
+    "west": "spatialminer:block/ores/keplerite_deepslate_ore",
+    "up": "spatialminer:block/ores/deepslate",
+    "down": "spatialminer:block/ores/deepslate"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "spatialminer:block/mechanic/base",
+    "north": "spatialminer:block/mechanic/vacuum_exposure_chamber_mk1_off",
+    "south": "spatialminer:block/mechanic/base",
+    "east": "spatialminer:block/mechanic/base",
+    "west": "spatialminer:block/mechanic/base",
+    "up": "spatialminer:block/mechanic/base",
+    "down": "spatialminer:block/mechanic/base"
+  }
+}

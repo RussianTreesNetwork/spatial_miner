@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "spatialminer:block/ores/keplerite_deepslate_ore"
+    }
+  }
+}

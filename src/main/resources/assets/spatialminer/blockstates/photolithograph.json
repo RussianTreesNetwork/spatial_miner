@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "spatialminer:block/mechanic/photolithograph" },
+    "facing=south": { "model": "spatialminer:block/mechanic/photolithograph", "y": 180 },
+    "facing=west":  { "model": "spatialminer:block/mechanic/photolithograph", "y": 270 },
+    "facing=east":  { "model": "spatialminer:block/mechanic/photolithograph", "y": 90 }
+  }
+}

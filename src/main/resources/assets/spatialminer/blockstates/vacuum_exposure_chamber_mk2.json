@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "spatialminer:block/mechanic/vacuum_exposure_chamber_mk2" },
+    "facing=south": { "model": "spatialminer:block/mechanic/vacuum_exposure_chamber_mk2", "y": 180 },
+    "facing=west":  { "model": "spatialminer:block/mechanic/vacuum_exposure_chamber_mk2", "y": 270 },
+    "facing=east":  { "model": "spatialminer:block/mechanic/vacuum_exposure_chamber_mk2", "y": 90 }
+  }
+}

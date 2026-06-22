@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "spatialminer:block/mechanic/miner_block" },
+    "facing=south": { "model": "spatialminer:block/mechanic/miner_block", "y": 180 },
+    "facing=west":  { "model": "spatialminer:block/mechanic/miner_block", "y": 270 },
+    "facing=east":  { "model": "spatialminer:block/mechanic/miner_block", "y": 90 }
+  }
+}

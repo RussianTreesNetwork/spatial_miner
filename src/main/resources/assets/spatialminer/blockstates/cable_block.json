@@ -1,0 +1,11 @@
+{
+  "multipart": [
+    { "apply": { "model": "spatialminer:block/cable/cable_center" } },
+    { "when": { "north": "true" }, "apply": { "model": "spatialminer:block/cable/cable_side", "y": 0 } },
+    { "when": { "south": "true" }, "apply": { "model": "spatialminer:block/cable/cable_side", "y": 180 } },
+    { "when": { "west": "true" }, "apply": { "model": "spatialminer:block/cable/cable_side", "y": 270 } },
+    { "when": { "east": "true" }, "apply": { "model": "spatialminer:block/cable/cable_side", "y": 90 } },
+    { "when": { "up": "true" }, "apply": { "model": "spatialminer:block/cable/cable_up" } },
+    { "when": { "down": "true" }, "apply": { "model": "spatialminer:block/cable/cable_down" } }
+  ]
+}

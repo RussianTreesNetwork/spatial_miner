@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "spatialminer:block/ores/endstone",
+    "north": "spatialminer:block/ores/chronite_ore",
+    "south": "spatialminer:block/ores/chronite_ore",
+    "east": "spatialminer:block/ores/chronite_ore",
+    "west": "spatialminer:block/ores/chronite_ore",
+    "up": "spatialminer:block/ores/endstone",
+    "down": "spatialminer:block/ores/endstone"
+  }
+}
